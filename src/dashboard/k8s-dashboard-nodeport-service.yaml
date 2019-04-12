@@ -1,0 +1,18 @@
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: kubernetes-dashbaord
+  name: kunernetes-dashboard-nodeport
+  namespace: kube-system
+spec:
+  ports:
+  - port: 8443
+    protocol: TCP
+    targetPort: 3443
+    nodePort: 31234
+  selector:
+    k8s-app: kubernetes-dashboard
+  sessionAffinity: None
+  type: NodePort
